@@ -1,0 +1,2 @@
+weather_app/static/* linguist-vendored
+weather_app/templates/* linguist-vendored
