@@ -1,6 +1,18 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<p> {{ response }} </p>
+{% if response == None %}
+    <p>Sorry! Our service is currently unavailable. Please try again later.</p>
+{% elif response.get("cod") == "404" %}
+    <p>Sorry! We can't find this location. Please try again.</p>
+{% else %}
+    <h1 class="text-center">Weather in {{ response.get("name") }}, {{ country }}</h1>
+
+    {% set name = response['weather'][0]['icon']+ ".svg" %}
+    <h1>
+        <img src="{{ url_for('static', filename=name ) }}", alt="icon", height="200", width="200" class="mx-auto d-block">
+    </h1>
+    <h3 class="text-center">It is currently {{ response.get('main').get('temp')|round|int }}°C with {{ response.get('weather')[0].get('description') }}</h3>
+{% endif %}
 
 {% endblock content %}
