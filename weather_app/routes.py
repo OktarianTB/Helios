@@ -27,7 +27,7 @@ def result(city, country_id):
         flash("Sorry! Our service is currently unavailable. Please try again later.", "danger")
         return redirect(url_for("weather.home"))
     elif response.get("cod") == "404":
-        flash(f"Sorry! We can't find this location. Please try again. {country_id}", "danger")
+        flash("Sorry! We can't find this location. Please try again.", "danger")
         return redirect(url_for("weather.home"))
     country = get_country_from_id(country_id)
     return render_template("result.html", title="Helios - Weather", response=response, country_id=country_id, country=country)
